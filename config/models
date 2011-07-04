@@ -1,0 +1,17 @@
+User
+    ident Text Eq
+    password Text Maybe Update
+    UniqueUser ident
+Email
+    email Text
+    user UserId Maybe Update
+    verkey Text Maybe Update
+    UniqueEmail email
+Post
+    parent PostId Maybe Eq Update
+    created UTCTime Desc default=now()
+    user UserId Update
+    title Text Eq
+    body Html
+    deriving
+    

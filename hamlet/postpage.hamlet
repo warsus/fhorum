@@ -1,0 +1,10 @@
+$maybe post <- mpost
+    <h3>Preview
+    <p>Title #{postTitle post}
+    #{postBody post}
+
+<form method="post" action=@{RootPostR} enctype="#{enctype}">
+  ^{form}
+    <tr>
+      <td colspan="2">
+        <input type="submit">

@@ -1,0 +1,2 @@
+<p> #{postTitle post}
+<blockqoute> #{postBody post}

@@ -1,0 +1,18 @@
+* DONE Build Tree out of DB Query
+CLOSED: [2011-07-01 Fri 16:42]
+* DONE Convert Tree to html
+CLOSED: [2011-07-01 Fri 16:42]
+* TODO User field in post
+[[file:config/models]]
+* TODO Get Parents of post
+* TODO Get Subtree of post
+** TODO PersistentInt to Int
+* TODO Authentication
+** TODO Install sendmail
+* TODO Profiling 
+- [ ] [[file:Handler/Root.hs::/^buildTree/][buildTree]]
+* TODO User logic in form
+  [2011-07-02 Sat]
+  [[file:~/code/haskell/yesod/forum/Handler/RootPost.hs::<*>%20pure%20Nothing][file:~/code/haskell/yesod/forum/Handler/RootPost.hs::<*> pure Nothing]]
+
+* TODO Show PostId
