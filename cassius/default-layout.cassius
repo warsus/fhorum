@@ -24,3 +24,6 @@ textarea
 
 #content
     clear: both
+
+#message
+    clear: both

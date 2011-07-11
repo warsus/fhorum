@@ -16,3 +16,9 @@ CLOSED: [2011-07-01 Fri 16:42]
   [[file:~/code/haskell/yesod/forum/Handler/RootPost.hs::<*>%20pure%20Nothing][file:~/code/haskell/yesod/forum/Handler/RootPost.hs::<*> pure Nothing]]
 
 * TODO Show PostId
+
+Pacman Dependecies
+Haskell platform
+postgresql
+* TODO Show User name in postview
+* TODO show whole tree in postview

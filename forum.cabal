@@ -74,3 +74,4 @@ executable         forum
                  , monad-loops
                  , containers
                  , blaze-html
+                 , old-locale

@@ -6,5 +6,7 @@
 
 / RootR GET
 /post RootPostR GET POST
-/post/#PostId PostIdR GET 
+/post/#PostId PostIdR GET POST
 /page/#Int Page GET
+/children/#PostId ChildrenR GET
+/reply/#PostId ReplyR POST

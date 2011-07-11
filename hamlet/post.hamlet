@@ -1,2 +1,5 @@
-<p> #{postTitle post}
-<blockqoute> #{postBody post}
+<form method="post" action=@{RootPostR} enctype="#{enctype}">
+  ^{form}
+    <tr>
+      <td colspan="2">
+        <input type="submit">

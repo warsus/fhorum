@@ -12,7 +12,6 @@
 	      	<a href="@{RootPostR}" alt="Post">Post
               <li class="section">
                 $maybe u <- mu
-                  <p #{userIdent $ snd u}. #
                   <a href=@{AuthR LogoutR}>Logout
                   .
                 $nothing 

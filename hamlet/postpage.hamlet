@@ -1,9 +1,7 @@
-$maybe post <- mpost
-    <h3>Preview
-    <p>Title #{postTitle post}
-    #{postBody post}
+<h1>#{postTitle post}
+#{postBody post}
 
-<form method="post" action=@{RootPostR} enctype="#{enctype}">
+<form method="post" action=@{ReplyR parent} enctype="#{enctype}">
   ^{form}
     <tr>
       <td colspan="2">
