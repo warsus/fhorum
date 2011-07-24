@@ -312,19 +312,6 @@ REVOKE ALL ON SCHEMA public FROM postgres;
 GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
-INSERT INTO "Post"(parent,title,body)
-VALUES (NULL, 'Paper','lolol'),
-(1, 'Recycled','lolol'),
-(2, '20 lb','lolol'),
-(2, '40 lb','lolol'),
-(1, 'Non-Recycled','lolol'),
-(5, '20 lb','lolol'),
-(5, '40 lb','lolol'),
-(5, 'Scraps','lolol');
-
-UPDATE "Post" SET parent = Null WHERE id = 5;
-
-SELECT * FROM "Post";
 --
 -- PostgreSQL database dump complete
 --

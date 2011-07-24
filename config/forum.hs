@@ -4,7 +4,7 @@ import Controller (withForum)
 import Network.Wai.Handler.Warp (run)
 
 main :: IO ()
-main = withForum $ run 3000
+main = withForum $ run 4321
 #else
 import Controller (withForum)
 import System.IO (hPutStrLn, stderr)

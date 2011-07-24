@@ -5,7 +5,7 @@
 -- includes database connection settings, static file locations, etc.
 -- In addition, you can configure a number of different aspects of Yesod
 -- by overriding methods in the Yesod typeclass. That instance is
--- declared in the Forum.hs file.
+-- declared in the Test.hs file.
 module Settings
     ( hamletFile
     , cassiusFile
@@ -42,11 +42,11 @@ approot :: Text
 -- you would probably want it to be:
 -- > approot = "http://www.yesod.com"
 -- Please note that there is no trailing slash.
-approot = "http://localhost:80"
+approot = "http://warsus.xen.prgmr.com"
 #else
 approot = "http://localhost:3000"
 #endif
-
+x=1
 -- | The location of static files on your system. This is a file system
 -- path. The default value works properly with your scaffolded site.
 staticdir :: FilePath
@@ -61,10 +61,10 @@ staticdir = "static"
 -- please see:
 --   http://code.google.com/speed/page-speed/docs/request.html#ServeFromCookielessDomain
 --
--- If you change the resource pattern for StaticR in Forum.hs, you will
+-- If you change the resource pattern for StaticR in Test.hs, you will
 -- have to make a corresponding change here.
 --
--- To see how this value is used, see urlRenderOverride in Forum.hs
+-- To see how this value is used, see urlRenderOverride in Test.hs
 staticroot :: Text
 staticroot = approot `mappend` "/static"
 
