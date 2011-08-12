@@ -33,7 +33,6 @@ library
                      Settings
                      StaticFiles
                      Handler.Root
-                     Handler.RootPost
                  
 executable         forum
     if flag(devel)

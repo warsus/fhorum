@@ -1,7 +1,7 @@
 <h1>#{postTitle post}
 #{postBody post}
 
-<form method="post" action=@{ReplyR parent} enctype="#{enctype}">
+<form method="post" action=@{ReplyR pid} enctype="#{enctype}">
   ^{form}
     <tr>
       <td colspan="2">

@@ -7,7 +7,7 @@ import Database.Persist.Base
 
 import Data.Monoid
 import Data.Time
-import Data.Either
+aimport Data.Either
 import Data.List (find)
 import qualified Data.Text as T
 
@@ -127,15 +127,7 @@ forestU threads = do
   return $ renderForestU url (buildForestU threads)
 
 getRootR :: Handler RepHtml
-getRootR = do
-    mu <- maybeAuth
-    now <- liftIO getCurrentTime
-    threads <- allPostsJoinUser
-    threadsTree <- forestU threads
-    defaultLayout $ do
-        h2id <- lift newIdent
-        setTitle "forum homepage"
-        addWidget $(widgetFile "homepage")
+getRootR = getPage 0 
 
 getRootPostR :: Handler RepHtml
 getRootPostR = do
@@ -145,28 +137,6 @@ getRootPostR = do
   defaultLayout $ do
                  h2id <- lift newIdent
                  addWidget $(widgetFile "post")
-
-getPostIdR :: PostId -> Handler RepHtml
-getPostIdR id = do
-    let parent = id
-    u <- requireAuth
-    liftIO $ print $ show $ toPersistValue parent
-    now <- liftIO getCurrentTime
-    post <- runDB $ get404 parent
-    (res, form, enctype) <- runFormPostNoNonce $ postForm Nothing (Just parent) now (fst u)
---    threads <- children parent
---    threadsTree <- tree (fromEither threads::[(PostId,Post)])
-    let mpost = case res of 
-                FormSuccess x -> Just x
-                _ -> Nothing
-    --tchilds <- runDB $ (children id)
-    --let childs = rights tchilds
-    url <- getUrlRender
-    --threadsTree <- return $ renderForest url (buildForest threads)
-    defaultLayout $ do
-        h2id <- lift newIdent
-        setTitle "forum homepage"
-        addWidget $(widgetFile "postpage")
 
 getPage :: Int -> Handler RepHtml
 getPage n = do
@@ -186,6 +156,22 @@ postForm mpost parent now user = fieldsToTable $ Post
                             <*> stringField "Title" (fmap postTitle mpost)
                             <*> htmlField "Body" { ffsId = Just "body"
                                                     } (fmap postBody mpost)
+
+getPostIdR :: PostId -> Handler RepHtml
+getPostIdR id = do
+    let pid = id
+    u <- requireAuth
+    now <- liftIO getCurrentTime
+    post <- runDB $ get404 parent
+    (res, form, enctype) <- runFormPostNoNonce $ postForm Nothing (Just pid) now (fst u)
+    let mpost = case res of 
+                FormSuccess x -> Just x
+                _ -> Nothing
+    url <- getUrlRender
+    defaultLayout $ do
+        h2id <- lift newIdent
+        setTitle "forum homepage"
+        addWidget $(widgetFile "postpage")
 
 postPostIdR :: PostId -> Handler RepHtml
 postPostIdR parent = do
