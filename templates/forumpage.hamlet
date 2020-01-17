@@ -1,2 +1,2 @@
+<a href="@{RootPostR}">New Post</a>.
 #{threadsTree}
-

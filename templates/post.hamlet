@@ -1,2 +1,11 @@
+
 <p> #{postTitle post}
 <blockqoute> #{postBody post}
+#{childTree}
+
+<p>Answer</p>
+<form method="POST" action=@{PostIdR postId} enctype="#{enctype}">
+  ^{widget}
+    <tr>
+      <td colspan="2">
+        <input type="submit">

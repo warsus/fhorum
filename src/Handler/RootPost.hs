@@ -7,15 +7,7 @@ import Data.Text (Text)
 import Data.Time
 import Model
 import Import
-
-postForm :: Maybe Post -> UTCTime -> (Key User) -> Html -> MForm Handler (FormResult Post, Widget)
-postForm mpost now user =  renderDivs $ Post
-                            <$> pure Nothing 
-                            <*> pure now
-                            <*> pure user
-                            <*> areq textField "Title" (fmap postTitle mpost)
-                            <*> areq htmlField "Body" (fmap postBody mpost)
-
+import Handler.Common (postForm)
 -- postFormlet mpost = fieldsToTable $ PostTemp
 --     <$> stringField "Title" (fmap title mpost)
 --     <*>	nicHtmlField "Body"
@@ -34,7 +26,7 @@ getRootPostR = do
     u <- requireAuthId
     maybeCurrentUserId <- maybeAuthId
     now <- liftIO getCurrentTime
-    (widget, enctype) <- generateFormPost $ postForm Nothing now u
+    (widget, enctype) <- generateFormPost $ postForm Nothing now u Nothing
     threads <- runDB $ selectList [PostTitle ==. "2"] []
     let mpost = Nothing
     defaultLayout $ do
@@ -46,7 +38,7 @@ postRootPostR :: Handler RepHtml
 postRootPostR = do
   u <- requireAuthId
   now <- liftIO getCurrentTime
-  ((res,widget),enctype) <- runFormPost $ postForm Nothing now u
+  ((res,widget),enctype) <- runFormPost $ postForm Nothing now u Nothing
   let mpost = case res of 
                 FormSuccess p -> Just p
                 _ -> Nothing
