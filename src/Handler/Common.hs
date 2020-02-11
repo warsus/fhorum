@@ -27,4 +27,4 @@ postForm mpost now user parent =  renderDivs $ Post
                             <*> pure now
                             <*> pure user
                             <*> areq textField "Title" (fmap postTitle mpost)
-                            <*> areq htmlField "Body" (fmap postBody mpost)
+                            <*> areq textField "Body" (fmap postBody mpost)

@@ -21,5 +21,5 @@ Post
     created UTCTime Desc default=now()
     user UserId Update
     title Text Eq
-    body Html
+    body Text
     deriving

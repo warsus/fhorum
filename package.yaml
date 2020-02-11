@@ -46,6 +46,8 @@ dependencies:
 - persistent >= 2.9
 - monad-loops >= 0.4
 - raw-strings-qq
+- hedn
+- parsec
 # The library contains all of our application code. The executable
 # defined below is just a thin wrapper.
 library:
@@ -78,7 +80,11 @@ executables:
     when:
     - condition: flag(library-only)
       buildable: false
-
+  migrate:
+    source-dirs: migration
+    main: Migrate.hs
+    dependencies:
+    - fhorum2
 # Test suite
 tests:
   fhorum2-test:

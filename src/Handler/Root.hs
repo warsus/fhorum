@@ -69,6 +69,18 @@ SELECT ??
 FROM sub_posts post|]
 
 
+recursive_parents :: Text
+recursive_parents = T.pack [r|WITH RECURSIVE super_posts(id, parent, created, "user", title, body) AS (
+    SELECT * FROM post WHERE id = ?
+  UNION ALL
+    SELECT ps.id, ps.parent, ps.created, ps.user, ps.title, ps.body
+    FROM super_posts sps, post ps
+    WHERE ps.id = sps.parent
+)
+SELECT ??
+FROM super_posts post|]
+
+
 children2 :: (MonadResource m1, MonadReader env m1, HasPersistBackend env, Monad m2, PersistEntity record, BaseBackend env ~ SqlBackend) => p -> ConduitM () c m1 [m2 (Either Text record)]
 children2 _pid = rawQuery recursive_children [] .| mapC (return.fromPersistValues) .| sinkList
 
@@ -150,10 +162,12 @@ getPostIdR postId = do
     --liftIO $ print $ show $ toPersistValue id
     now <- liftIO getCurrentTime
     post <- runDB $ get404 postId
-    children <- runDB $ rawSql (recursive_children2) [Prelude.head $ keyToValues postId] :: Handler [Entity Post]
+    parentPosts <- runDB $ rawSql recursive_parents (keyToValues postId) :: Handler [Entity Post]
+    children <- runDB $ rawSql recursive_children2 (keyToValues postId) :: Handler [Entity Post]
     (widget, enctype) <- generateFormPost $ postForm Nothing now u (Just postId)
     --let childs = rights tchilds
     childTree <- tree children :: Handler Markup
+    parentTree <- tree parentPosts :: Handler Markup
     _url <- getUrlRender
     --threadsTree <- return $ renderForest url (buildForest threads)
     defaultLayout $ do
